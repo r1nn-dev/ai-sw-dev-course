@@ -4,6 +4,7 @@
 ### Repository Structure
 ```
 ai-sw-dev-course/
+├── setup/ 
 ├── 00_basic/                  # Computer System, Software, Web, Internet
 ├── 01_llm/                    # LLM-based dev environment
 ├── 02_ai-agent-coding/        # Coding agent structure
