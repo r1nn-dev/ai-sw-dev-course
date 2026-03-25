@@ -1,0 +1,4 @@
+- python
+- ollama
+- uv
+- antigravity
