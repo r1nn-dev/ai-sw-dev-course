@@ -2,3 +2,5 @@
 - ollama
 - uv
 - antigravity
+- git
+- GitHub Desktop
