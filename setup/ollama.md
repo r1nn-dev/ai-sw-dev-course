@@ -1,22 +1,21 @@
 # Ollama 설치
 
 ## Ollama란?
-
-**Ollama**는 로컬 환경에서 LLM(대규모 언어 모델)을 쉽게 실행할 수 있는 도구이다. 별도의 클라우드 서비스 없이 자신의 컴퓨터에서 다양한 오픈소스 모델을 실행할 수 있다.
+- 로컬 환경에서 LLM(대규모 언어 모델)을 쉽게 실행할 수 있는 도구
+- 별도의 클라우드 서비스 없이 자신의 컴퓨터에서 다양한 오픈소스 모델을 실행할 수 있다.
 
 주요 특징:
-
 - 로컬에서 LLM 실행 (인터넷 불필요)
 - 간단한 CLI 인터페이스
 - Llama 3, Gemma, Mistral, Phi 등 다양한 모델 지원
 - REST API 제공 (기본 포트: `11434`)
 - GPU 가속 지원 (Apple Silicon, NVIDIA)
 
+
 ## 설치
 
 ### macOS
-
-macOS에서는 다음 세 가지 방법 중 하나를 선택해 설치할 수 있습니다.
+macOS에서는 다음 세 가지 방법 중 하나를 선택해 설치할 수 있다.
 
 **방법 1: 터미널 명령어 (공식 설치 스크립트)**
 ```bash
@@ -36,19 +35,17 @@ brew install ollama
 **방법 3: 직접 다운로드**
 [https://ollama.com/download](https://ollama.com/download) 에서 패키지를 받아 직접 설치합니다.
 
-### Windows
 
+### Windows
 1. [https://ollama.com/download](https://ollama.com/download) 에서 설치 파일 다운로드
 2. 설치 프로그램 실행
 
 ### Linux
-
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
 ## 설치 확인
-
 ```bash
 ollama --version
 ```
@@ -56,7 +53,6 @@ ollama --version
 ## 기본 사용법
 
 ### 모델 다운로드 및 실행
-
 ```bash
 # 모델 다운로드 및 대화 시작
 ollama run llama3.2
@@ -73,7 +69,6 @@ ollama run gemma3:4b
 ```
 
 ### 모델 관리
-
 ```bash
 # 다운로드된 모델 목록 확인
 ollama list
@@ -86,7 +81,6 @@ ollama rm llama3.2
 ```
 
 ### 서버 실행
-
 ```bash
 # Ollama 서버 시작 (백그라운드)
 ollama serve
