@@ -91,6 +91,13 @@ qwen2.5-coder:7b 모델과 터미널에서 채팅할 수 있도록 구현해줘.
 이전 대화를 기억할 수 있도록 대화 히스토리를 누적해줘.
 "exit"를 입력하면 종료되도록 해줘.
 ```
+예상 결과:
+```
+README.md 파일 업데이트
+main.py 파일 업데이트
+- 대화 히스토리 누적
+- "exit" 입력 시 종료
+```
 
 ### 4. `tools.py` — 파일 I/O 함수 구현
 ```bash
@@ -107,7 +114,7 @@ requests와 BeautifulSoup을 사용해서
 에러 처리도 포함해줘.
 ```
 
-### 6. `main.py` — `main.py` — System Prompt 기반 Tool Calling 루프 연결 (핵심)
+### 6. `main.py` — System Prompt 기반 Tool Calling 루프 연결 (핵심)
 
 ```bash
 main.py를 수정해서 LLM이 도구를 호출할 수 있는 에이전트로 만들어줘.
@@ -134,7 +141,7 @@ LLM 응답에 [TOOL_CALL]이 있으면:
 ```
 **예상 동작 흐름**
 ```
-사용자: "젤다에 대해 검색하고 zelda.md에 저장해줘"
+사용자: "젤다에 대해 검색하고 결과를 zelda.md 파일에 저장해줘"
     ↓
 LLM: [TOOL_CALL] {"tool": "search_namuwiki", "args": {"keyword": "젤다"}}
     ↓

@@ -1,0 +1,11 @@
+[project]
+name = "ollama-namu-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.14.3",
+    "ollama>=0.6.1",
+    "requests>=2.33.1",
+]
