@@ -1,0 +1,299 @@
+:root {
+    --bg-gradient: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent-gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --danger: #ff4d4d;
+    --success: #00ff88;
+    --font-main: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: var(--text-primary);
+}
+
+/* Abstract Shapes for Background Depth */
+.shape {
+    position: absolute;
+    background: var(--accent-gradient);
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: -1;
+    opacity: 0.15;
+    animation: move 20s infinite alternate linear;
+}
+
+.shape-1 { width: 500px; height: 500px; top: -10%; left: -10%; }
+.shape-2 { width: 400px; height: 400px; bottom: -5%; right: -5%; animation-delay: -10s; }
+
+@keyframes move {
+    from { transform: translate(0, 0); }
+    to { transform: translate(100px, 100px); }
+}
+
+.container {
+    width: 100%;
+    max-width: 520px;
+    padding: 2.5rem;
+    margin: 1rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+header {
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+/* Input Section */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 2.5rem;
+}
+
+.input-row {
+    display: flex;
+    gap: 10px;
+}
+
+input[type="text"], input[type="date"] {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 0.8rem 1.2rem;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+/* Chrome, Safari, Edge date picker styling */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+input[type="text"]:focus, input[type="date"]:focus {
+    border-color: rgba(0, 210, 255, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.15);
+}
+
+.add-btn {
+    background: var(--accent-gradient);
+    border: none;
+    border-radius: 16px;
+    padding: 0 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+}
+
+.add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 210, 255, 0.4);
+    filter: brightness(1.1);
+}
+
+.add-btn:active {
+    transform: translateY(0);
+}
+
+/* To-Do List Section */
+ul {
+    list-style: none;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+ul::-webkit-scrollbar {
+    width: 5px;
+}
+
+ul::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 10px;
+}
+
+li {
+    background: rgba(255, 255, 255, 0.03);
+    margin-bottom: 0.8rem;
+    padding: 1rem 1.2rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideIn 0.4s ease forwards;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+li:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--glass-border);
+    transform: scale(1.01);
+}
+
+.todo-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.checkbox {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    border: 2px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    color: transparent;
+    flex-shrink: 0;
+}
+
+li.completed .checkbox {
+    background: var(--success);
+    border-color: var(--success);
+    color: #000;
+}
+
+.todo-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.todo-text {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    transition: all 0.3s;
+    font-weight: 400;
+}
+
+li.completed .todo-text {
+    color: var(--text-secondary);
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.date-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 8px;
+    border-radius: 6px;
+    width: fit-content;
+}
+
+.date-badge.overdue {
+    color: var(--danger);
+    background: rgba(255, 77, 77, 0.1);
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 12px;
+    transition: all 0.2s;
+    opacity: 0;
+}
+
+li:hover .delete-btn {
+    opacity: 1;
+}
+
+.delete-btn:hover {
+    color: var(--danger);
+    background: rgba(255, 77, 77, 0.1);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    display: none;
+}
+
+ul:empty + .empty-state {
+    display: block;
+}
+
+/* Micro-interactions */
+.lucide {
+    width: 18px;
+    height: 18px;
+}
+
+.date-badge .lucide {
+    width: 12px;
+    height: 12px;
+}

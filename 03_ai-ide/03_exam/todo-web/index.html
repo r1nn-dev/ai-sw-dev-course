@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium To-Do | Stay Productive</title>
+    <meta name="description"
+        content="A gorgeous, premium, and interactive To-Do list application built with glassmorphism aesthetics.">
+    <!-- Google Fonts: Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+
+    <div class="container">
+        <header>
+            <h1>Focus</h1>
+            <p class="subtitle" id="date-display"></p>
+        </header>
+
+        <div class="input-group">
+            <div class="input-row">
+                <input type="text" id="todo-input" placeholder="무엇을 해야 하나요?" autocomplete="off">
+                <button class="add-btn" id="add-btn" aria-label="Add Task">
+                    <i data-lucide="plus"></i>
+                </button>
+            </div>
+            <div class="input-row">
+                <input type="date" id="todo-date" aria-label="Due Date">
+            </div>
+        </div>
+
+        <ul id="todo-list">
+            <!-- To-Dos will appear here -->
+        </ul>
+
+        <div class="empty-state">
+            <p>오늘의 할 일을 추가해 보세요!</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Update Date
+        const dateDisplay = document.getElementById('date-display');
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateDisplay.textContent = new Date().toLocaleDateString('ko-KR', options);
+
+        const todoInput = document.getElementById('todo-input');
+        const todoDate = document.getElementById('todo-date');
+        const addBtn = document.getElementById('add-btn');
+        const todoList = document.getElementById('todo-list');
+
+        // Function: Add Todo
+        function addTodo() {
+            const text = todoInput.value.trim();
+            const dateValue = todoDate.value;
+            if (text === '') return;
+
+            const li = document.createElement('li');
+            
+            // Overdue check
+            let dateHtml = '';
+            if (dateValue) {
+                const today = new Date().setHours(0, 0, 0, 0);
+                const due = new Date(dateValue).setHours(0, 0, 0, 0);
+                const isOverdue = due < today;
+                dateHtml = `
+                    <div class="date-badge ${isOverdue ? 'overdue' : ''}">
+                        <i data-lucide="calendar"></i>
+                        <span>${dateValue}</span>
+                    </div>
+                `;
+            }
+
+            li.innerHTML = `
+                <div class="todo-content">
+                    <div class="checkbox">
+                        <i data-lucide="check"></i>
+                    </div>
+                    <div class="todo-info">
+                        <span class="todo-text">${text}</span>
+                        ${dateHtml}
+                    </div>
+                </div>
+                <button class="delete-btn" aria-label="Delete Task">
+                    <i data-lucide="trash-2"></i>
+                </button>
+            `;
+
+            // Initialize icons for new element
+            lucide.createIcons({
+                root: li
+            });
+
+            // Toggle Complete
+            const content = li.querySelector('.todo-content');
+            content.addEventListener('click', () => {
+                li.classList.toggle('completed');
+            });
+
+            // Delete Task
+            const delBtn = li.querySelector('.delete-btn');
+            delBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                li.style.transform = 'scale(0.9)';
+                li.style.opacity = '0';
+                setTimeout(() => {
+                    li.remove();
+                }, 300);
+            });
+
+            todoList.appendChild(li);
+            todoInput.value = '';
+            todoDate.value = '';
+            todoInput.focus();
+            
+            // Scroll to bottom
+            todoList.scrollTo({ top: todoList.scrollHeight, behavior: 'smooth' });
+        }
+
+        function filterByKeyword(keyword) {
+            console.log(`[필터링 시작] 키워드: "${keyword}"`);
+
+            // null 또는 빈 문자열 체크
+            if (!keyword || keyword.trim() === '') {
+                console.log('키워드가 유효하지 않아 모든 항목을 표시합니다.');
+                const allTodos = document.querySelectorAll('#todo-list li');
+                allTodos.forEach(todo => todo.style.display = 'flex');
+                return;
+            }
+
+            const searchKeyword = keyword.toLowerCase();
+            const todos = document.querySelectorAll('#todo-list li');
+            let matchCount = 0;
+            
+            todos.forEach(todo => {
+                const text = todo.querySelector('.todo-text').textContent.toLowerCase();
+                if (text.includes(searchKeyword)) {
+                    todo.style.display = 'flex';
+                    matchCount++;
+                } else {
+                    todo.style.display = 'none';
+                }
+            });
+
+            console.log(`[필터링 완료] 검색 결과: ${matchCount}건`);
+        }
+
+        // Event Listeners
+        addBtn.addEventListener('click', addTodo);
+
+        todoInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                addTodo();
+            }
+        });
+
+        // Initial Focus
+        todoInput.focus();
+    </script>
+</body>
+
+</html>
