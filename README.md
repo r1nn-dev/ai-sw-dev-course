@@ -10,7 +10,9 @@ ai-sw-dev-course/
 ├── 02_ai-agent-coding/        # Coding agent structure
 ├── 03_ai-ide/                 # AI-powered IDE
 ├── 04_ai-agent-pattern/       # AI agent patterns
-├── 05_ai-terminal/            # AI-based terminal and dev environment
+├── 05_claude-code/            # Claude Code usage and customization
+
+
 ├── 06_ai-test/                # AI-based testing and security
 ├── 07_ai-debug/               # AI-based debugging and monitoring
 ├── 08_ai-ui/                  # AI system operations and monitoring
@@ -23,6 +25,7 @@ ai-sw-dev-course/
 ```
 ```
 NN_topic/
-├── notes.md         # notes
-└── assignment/      # code
+├── NN_note.md       # notes
+├── NN_exam/         # in-class practice
+└── NN_asgn/         # assignment
 ```
