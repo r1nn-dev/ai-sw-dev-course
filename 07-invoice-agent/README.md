@@ -1,5 +1,40 @@
-# 10주차 실습 — AI 에이전틱 설계 
+# 실습: 인보이스 에이전트
+구조화 데이터 추출 + LLM 기반 자동화 에이전트
 
+### 문제 배경
+
+- 매일 수십 개의 청구서 처리해야 하는 상황:
+    - PDF, 스캔 이미지, 이메일 텍스트 등 형식이 제각각
+    - 공급업체마다 레이아웃이 다름
+    - 자동화 없이는 누군가 매번 읽고 수작업으로 옮겨야 함
+- 기존 코드 방식의 한계
+    - 공급업체마다 별도 파서를 작성해야 함
+    - 새 형식 등장 시마다 코드 수정 필요
+- LLM 방식 → 범용 파서 형식에 관계없이 사람처럼 청구서를 읽고 이해
+
+### 핵심 도구: `prompt_llm_for_json`
+
+- 어떤 텍스트든 원하는 JSON 형태로 변환하는 범용 도구
+
+```python
+@register_tool()
+def prompt_llm_for_json(action_context, schema, prompt):
+    generate_response = action_context.get("llm")
+    for i in range(3):  # 3회 재시도
+        try:
+            response = generate_response(Prompt(messages=[
+                {"role": "system", "content": f"JSON 스키마를 따르라:\n{json.dumps(schema)}"},
+                {"role": "user", "content": prompt}
+            ]))
+            # 마크다운 코드블록 파싱
+            if "```json" in response:
+                start = response.find("```json")
+                end = response.rfind("```")
+                response = response[start+7:end].strip()
+            return json.loads(response)
+```
+
+---
 ## 사전 준비
 
 **1. Ollama 설치 및 모델 다운로드**
@@ -12,6 +47,60 @@ ollama pull qwen2.5-coder:7b
 ```bash
 uv sync
 ```
+
+### **설계 결정: 특화 도구 vs 범용 도구**
+
+| 구분 | **범용 도구** | **특화 도구** |
+| --- | --- | --- |
+| 장점 | 어떤 문서든 처리 가능 |   • 고정 스키마로 동일한 구조 보장
+  • 필수 필드 누락 시 오류 → 불안전 데이터 방지
+  • 집중된 프롬프트 → 추출 정확도 향상 |
+| 단점 |   매번 에이전트가 스키마 생성 → 일관성 없음 | 새 형식에 유연하지 않음 |
+
+**실전 권장: 하이브리드**
+
+- 핵심 문서 유형 → **특화 도구**
+- 엣지 케이스 / 새로운 형식 → **범용 도구**
+- 자주 쓰는 핵심 문서 유형은 특화 도구, 처음 보는 새 형식은 범용 도구를 사용한다.
+- 설계 결정 포인트
+    - 범용 도구로 직접 쓸 수도 있고, 인보이스에 특화된 도구를 따로 만들 수도 있다.
+
+> 실습에서는 특화 도구를 만든다.
+> 
+> - 청구서마다 항상 동일한 필드(인보이스 번호, 날짜, 금액 등)가 추출되어야 한다.
+> - 인보이스 번호가 없으면 에러를 내야 한다.
+> - 날짜 형식이 틀리면 잡아야 한다.
+
+### 인보이스 에이전트 구조
+
+```
+인보이스 텍스트 수신
+       ↓
+extract_invoice_data  :  원시 텍스트 → 고정 스키마 구조화 데이터
+       ↓                  (인보이스 번호 / 날짜 / 금액 / 품목 추출)
+  store_invoice       :  인보이스 번호 기준으로 저장
+       ↓
+  처리 결과 확인
+```
+
+- 도구 1 : `extract_invoice_data`
+    - 원시 텍스트 → 고정 스키마 구조화 데이터
+    - 인보이스 번호 / 날짜 / 금액 / 품목 추출
+- 도구 2 : `store_invoice`
+    - 구조화된 데이터 → 인보이스 번호 기준으로 저장
+- 메인 에이전트 흐름
+    - 인보이스 텍스트 수신
+    - extract_invoice_data 호출
+    - store_invoice 호출
+    - 처리 결과 확인
+- 핵심 설계 원칙 : 각 도구는 단일 책임만 가짐
+
+### 실습 목표
+
+- `prompt_llm_for_json` 을 이용해 인보이스 파서 만들기
+- `extract_invoice_data` + `store_invoice` 도구 구현
+- 에이전트에 도구 등록 후 실행
+
 
 ---
 
