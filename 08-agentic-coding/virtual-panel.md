@@ -14,7 +14,8 @@
 }
 ```
 
-`teammateMode: "tmux"`로 설정하면 split pane 모드가 활성화되고, tmux인지 iTerm2인지 자동 감지한다.
+- `teammateMode: "tmux"`로 설정
+  - split pane 모드가 활성화되고, tmux인지 iTerm2인지 자동 감지한다.
 
 ### 2. tmux 사용 (macOS/Linux)
 tmux를 설치한 후, Claude Code 실행 전에 반드시 tmux 세션을 먼저 시작해야 한다:
@@ -26,6 +27,8 @@ claude
 ```
 
 ---
+### 3. 프롬프트 
+
 
 아래 순서대로 Agent teams 구성해 패널 에이전트를 소환하고, 
 내가 주제를 말하면 각 에이전트끼리 토론하고 결과를 이야기 해줘 
