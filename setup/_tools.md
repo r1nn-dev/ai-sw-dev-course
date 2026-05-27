@@ -2,8 +2,9 @@
 - ollama
 - uv
 - antigravity
-- git
+- Git
 - GitHub Desktop
+- Docker Desktop
 - virtual-panel
-- nodd.js
-- 
+- node.js
+- vscode extensions
