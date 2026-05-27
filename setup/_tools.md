@@ -4,3 +4,6 @@
 - antigravity
 - git
 - GitHub Desktop
+- virtual-panel
+- nodd.js
+- 
