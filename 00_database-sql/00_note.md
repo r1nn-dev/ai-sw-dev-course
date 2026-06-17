@@ -33,6 +33,10 @@
 │ └ menu.sql                 # MENU TABLE
 ├ 00-6_advanced-data/      # 고급 SQL: View, Transaction, Join
 │ ├ advanced-data.md
-│ └ advanced-data.sql
+│ ├ advanced-data.sql
+│ ├ borrower.sql             # BORROWER TABLE
+│ ├ jobs.sql                 # JOBS TABLE
+│ └ loan.sql                 # LOAN TABLE
+│
 └ 00_note.md 
 ```
