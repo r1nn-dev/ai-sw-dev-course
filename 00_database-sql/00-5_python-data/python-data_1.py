@@ -8,37 +8,38 @@
 # 6. 특정 컬럼의 최댓값 행을 찾는다.
 ###############################################################
 
+
 import sqlite3
 import pandas as pd
 
-# 1. CSV 파일을 읽는다.
+# 0. CSV 파일을 읽는다.
 df = pd.read_csv("menu.csv")
 
-# 2. SQLite 데이터베이스에 연결한다.
+# 1. SQLite 데이터베이스에 연결한다.
 con = sqlite3.connect("menu.db")
 
-# 3. DataFrame을 SQL 테이블로 저장한다.
+# 2. DataFrame을 SQL 테이블로 저장한다.
 df.to_sql("MENU", con, if_exists="replace", index=False)
 
-# 4. SQL로 처음 5행만 조회한다.
+# 3. SQL로 처음 5행만 조회한다.
 preview = pd.read_sql_query(
     "SELECT * FROM MENU LIMIT 5",
     con
 )
 print(preview)
 
-# 5. 전체 데이터를 DataFrame으로 읽는다.
+# 4. 전체 데이터를 DataFrame으로 읽는다.
 menu_df = pd.read_sql_query(
     "SELECT * FROM MENU",
     con
 )
 
-# 6. 요약 통계를 확인한다.
+# 5. 요약 통계를 확인한다.
 print(menu_df.describe())
 
-# 7. Sodium 컬럼이 가장 큰 행을 찾는다.
+# 6. Sodium 컬럼이 가장 큰 행을 찾는다.
 max_sodium_row = menu_df.loc[menu_df["Sodium"].idxmax()]
 print(max_sodium_row)
 
-# 8. 연결을 닫는다.
+# 7. 연결을 닫는다.
 con.close()
