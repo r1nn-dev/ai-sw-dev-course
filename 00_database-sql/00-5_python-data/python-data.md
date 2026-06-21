@@ -7,31 +7,33 @@
 - Pandas `read_sql_query`와 `to_sql`을 사용해 SQL 결과를 DataFrame으로 읽고, CSV를 테이블로 저장한다.
 - Jupyter에서 SQL Magic(`%sql`, `%%sql`)을 사용하는 방법을 이해한다.
 
-## 사전 준비
+---
+## 실습 개요
 
-**방법 A — uv 프로젝트로 시작 (권장)**
+- 테이블: `menu.sql`
+- 실행 파일: `python-data_1.py`, `python-data_2.py`
+
+
+### 방법 A — uv 프로젝트로 시작 (권장)
 
 ```bash
 uv init                          # pyproject.toml 생성 (이미 프로젝트면 생략)
 uv add pandas ipython-sql        # 의존성 추가 + 설치
 ```
 
-**방법 B — 프로젝트 없이 가상환경에만 설치**
+### 방법 B — 프로젝트 없이 가상환경에만 설치
 
 ```bash
 uv venv                          # .venv 생성
 uv pip install pandas ipython-sql
 ```
-
-> `uv add`는 `pyproject.toml`이 있어야 하므로 `uv init`이 선행되어야 합니다.
-> 빠르게 설치만 하고 싶다면 방법 B를 쓰세요.
+- `uv add`는 `pyproject.toml`이 있어야 하므로 `uv init`이 선행되어야 한다.
+- 빠르게 설치만 하고 싶다면 방법 B 사용하기.
 
 ```python
 import sqlite3
 import pandas as pd
 ```
-
-아래 `menu_data` 딕셔너리를 모든 문제에서 공통으로 사용합니다.
 
 ```python
 menu_data = {
@@ -57,18 +59,17 @@ menu_data = {
                      4.0, 2.0, 2.0, 12.0, 7.0]
 }
 ```
+- `menu_data` 딕셔너리를 모든 문제에서 공통으로 사용한다.
 
 ---
 
-## 연습 문제
+## 실행 순서
 
-### 문제 1 — SQLite 연결 및 테이블 생성
+### 1.  SQLite 연결 및 테이블 생성
 
-**과제:** Python에서 SQLite 인메모리 데이터베이스에 연결하고,
-MENU 테이블을 생성한 뒤 `con`과 `cur`의 타입을 출력하세요.
+- Python에서 SQLite 인메모리 데이터베이스에 연결하고,  MENU 테이블을 생성한 뒤 `con`과 `cur`의 타입 출력하기.
 
 ```python
-# 여기에 작성하세요
 import sqlite3
 
 con = 
@@ -76,33 +77,24 @@ cur =
 
 # MENU 테이블 생성 (Item, Category, Serving_Size, Calories, Total_Fat, Sodium, Protein)
 
-
 ```
 
----
 
-### 문제 2 — CSV를 테이블로 저장 (to_sql)
+### 2. CSV를 테이블로 저장 (to_sql)
 
-**과제:** `menu_data`로 DataFrame을 만들고,
-SQLite 데이터베이스에 MENU 테이블로 저장하세요.
+- `menu_data`로 DataFrame을 만들고, SQLite 데이터베이스에 MENU 테이블로 저장하기.
 
 ```python
-# 여기에 작성하세요
 df = 
 
 # to_sql 로 저장
-
 ```
 
----
+### 3. DB-API로 SQL 실행: fetchall
 
-### 문제 3 — DB-API로 SQL 실행: fetchall
-
-**과제:** cursor를 사용해 MENU 테이블의 Item, Category, Calories를 조회하고,
-`fetchall()`로 결과를 가져와 출력하세요.
+- cursor를 사용해 MENU 테이블의 Item, Category, Calories를 조회하고, `fetchall()`로 결과를 가져와 출력하기.
 
 ```python
-# 여기에 작성하세요
 cur.execute(   )
 
 rows = 
@@ -111,13 +103,11 @@ for row in rows:
     print(row)
 ```
 
----
 
-### 문제 4 — fetchmany로 일부만 가져오기
+### 4. fetchmany로 일부만 가져오기
 
-**과제:** MENU 테이블에서 Item, Calories, Protein을 조회하고,
-`fetchmany(5)`로 처음 5행만 가져오세요.
-그 다음, SQL `LIMIT`를 사용하는 더 나은 방법도 함께 작성하세요.
+- 방법 1: MENU 테이블에서 Item, Calories, Protein을 조회하고, `fetchmany(5)`로 처음 5행만 가져오기.
+- 방법 2: SQL `LIMIT`를 사용하는 더 나은 방법.
 
 ```python
 # 방법 1: fetchmany 사용
@@ -125,37 +115,29 @@ cur.execute(   )
 first_five = 
 
 
-# 방법 2: SQL LIMIT 사용 (더 나은 방식)
+# 방법 2: SQL LIMIT 사용
 
 ```
 
----
 
-### 문제 5 — Pandas로 SQL 결과 읽기 (read_sql_query)
+### 5. Pandas로 SQL 결과 읽기 (read_sql_query)
 
-**과제:** `pd.read_sql_query`를 사용해 MENU 테이블 전체를 DataFrame으로 읽고,
-`head()`와 `shape`를 출력하세요.
+- `pd.read_sql_query`를 사용해 MENU 테이블 전체를 DataFrame으로 읽고, `head()`와 `shape` 출력하기.
 
 ```python
-# 여기에 작성하세요
 df_menu = 
 
 print(       )  # 처음 5행
 print(       )  # (행 수, 열 수)
 ```
 
----
 
-### 문제 6 — SQL 조건 쿼리를 DataFrame으로
+### 6. SQL 조건 쿼리를 DataFrame으로
 
-**과제:** Burgers 카테고리 메뉴 중 칼로리가 400 이상인 항목을
-DataFrame으로 읽어 출력하세요.
+- Burgers 카테고리 메뉴 중 칼로리가 400 이상인 항목을 DataFrame으로 읽어 출력하기.
 
 ```python
-# 여기에 작성하세요
 query = """
-
-
 
 """
 
@@ -163,13 +145,11 @@ df_burgers =
 print(df_burgers)
 ```
 
----
 
-### 문제 7 — 요약 통계: describe()
+### 7. 요약 통계: describe()
 
-**과제:** MENU 테이블 전체를 DataFrame으로 읽은 뒤,
-`describe()`로 숫자 컬럼의 요약 통계를 출력하세요.
-그리고 아래 질문에 코드로 답하세요.
+- MENU 테이블 전체를 DataFrame으로 읽은 뒤,
+`describe()`로 숫자 컬럼의 요약 통계를 출력하기.
 
 ```python
 df = pd.read_sql_query("SELECT * FROM MENU", con)
@@ -177,13 +157,13 @@ df = pd.read_sql_query("SELECT * FROM MENU", con)
 # 요약 통계 출력
 
 
-# Q1. Calories 컬럼의 평균은?
+# Calories 컬럼의 평균
 avg_cal = 
 
-# Q2. Sodium 컬럼의 최댓값은?
+# Sodium 컬럼의 최댓값
 max_sodium = 
 
-# Q3. Protein 컬럼의 최솟값은?
+# Protein 컬럼의 최솟값
 min_protein = 
 
 print(f"평균 칼로리: {avg_cal:.1f}")
@@ -191,14 +171,14 @@ print(f"최대 나트륨: {max_sodium}")
 print(f"최소 단백질: {min_protein}")
 ```
 
----
 
-### 문제 8 — SQL Magic (Jupyter Notebook)
+### 8. SQL Magic (Jupyter Notebook)
 
-**과제:** Jupyter Notebook에서 SQL Magic을 사용해
-카테고리별 평균 칼로리를 조회하세요.
-
-> **참고:** SQL Magic은 파일 기반 DB가 필요합니다. `menu.db`로 저장 후 연결하세요.
+- Jupyter Notebook에서 SQL Magic을 사용해
+카테고리별 평균 칼로리 조회하기.
+- **참고:** 
+    - SQL Magic은 파일 기반 DB가 필요하다. 
+    - `menu.db`로 저장 후 연결하기.
 
 ```python
 # 셀 1: 파일 DB에 데이터 저장
@@ -216,22 +196,19 @@ con_file.close()
 # 셀 4: Cell magic으로 카테고리별 평균 칼로리 조회
 %%sql
 
-
-
 ```
 
----
 
-### 문제 9 — 최댓값 행 찾기
+### 8.  최댓값 행 찾기
 
-**과제:** 나트륨(Sodium) 함량이 가장 높은 메뉴 항목을 찾으세요.
-SQL 서브쿼리를 사용하는 방법과 Pandas를 사용하는 방법 모두 작성하세요.
+- 나트륨(Sodium) 함량이 가장 높은 메뉴 항목 찾기.
+- 방법
+    - 방법 1: SQL 서브쿼리 사용.
+    - 방법 2: Pandas 사용.
 
 ```python
 # 방법 1: SQL 서브쿼리
 query_sql = """
-
-
 
 """
 df_max = pd.read_sql_query(query_sql, con)
@@ -245,14 +222,13 @@ print(max_row[['Item', 'Category', 'Sodium']])
 
 ---
 
-### 문제 10 — 통합 분석 워크플로우
+## 통합 분석 워크플로우
 
-**과제:** 아래 분석 시나리오를 처음부터 끝까지 Python 코드로 구현하세요.
-
-1. `menu_data`를 SQLite 인메모리 DB에 저장
-2. SQL로 카테고리별 평균 칼로리와 최대 단백질 계산
-3. 결과를 DataFrame으로 가져오기
-4. 평균 칼로리 높은 순으로 정렬하여 출력
+- 아래 분석 시나리오를 처음부터 끝까지 Python 코드로 구현하기.
+    1. `menu_data`를 SQLite 인메모리 DB에 저장
+    2. SQL로 카테고리별 평균 칼로리와 최대 단백질 계산
+    3. 결과를 DataFrame으로 가져오기
+    4. 평균 칼로리 높은 순으로 정렬하여 출력
 
 ```python
 import sqlite3
@@ -263,8 +239,6 @@ import pandas as pd
 
 # 2. SQL 집계 쿼리 작성
 query = """
-
-
 
 """
 
