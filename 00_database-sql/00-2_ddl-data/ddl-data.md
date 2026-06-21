@@ -10,7 +10,10 @@
 ---
 
 ## 테이블 생성
-- 파일: `author.sql`, `book.sql`
+
+- 테이블: `author.sql`, `book.sql`
+- 실행 파일: `ddl-data.sql`
+
 
 ### 1. CREATE TABLE: AUTHOR
 
