@@ -1,5 +1,6 @@
 # Database SQL
 
+## 파일 구조
 ```
 00_database-sql/
 ├── 00-1_crud-data/          # 1. 데이터베이스와 SQL 기본 연산 CRUD
