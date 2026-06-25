@@ -99,3 +99,16 @@ uv run jupyter notebook
     ▼
 [Generate]  수정본 작성  ←─ max_revisions 초과 시 종료
 ```
+
+---
+## 폴더 구조
+```
+08_langgraph/
+├── 08-1_langgraph_components.ipynb
+├── 08-2_agentic_search.ipynb
+├── 08-3_persistence_and_streaming.ipynb
+├── 08-4_human_in_the_loop.ipynb
+├── 08-5_essay_agent.ipynb
+│
+└── 08_note.md 
+```
