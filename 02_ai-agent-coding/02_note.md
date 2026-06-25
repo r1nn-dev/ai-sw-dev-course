@@ -73,7 +73,7 @@
 │   └── myAgent/               
 ├── 02-2_mcp-server/           
 │   ├── guide.md
-│   └──main.py
+│   └── main.py
 ├── 02-3_namu-agent/            
 │   ├── guide.md
 │   ├── result.md
