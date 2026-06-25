@@ -63,3 +63,21 @@
 5. LLM: 컨텍스트를 기반으로 필요한 Tool 호출을 판단하고 요청 생성
 6. MCP Server: Tool을 실행하고 결과를 반환
 7. LLM: 결과를 컨텍스트에 추가하여 최종 응답 생성
+
+---
+## 폴더 구조
+```
+02_ai-agent-coding/
+├── 02-1_coding-agent/          
+│   ├── myAgent-menu.md
+│   └── myAgent/               
+├── 02-2_mcp-server/           
+│   ├── guide.md
+│   └──main.py
+├── 02-3_namu-agent/            
+│   ├── guide.md
+│   ├── result.md
+│   └── ollama-namu-agent/
+│
+└── 02_note.md 
+```
