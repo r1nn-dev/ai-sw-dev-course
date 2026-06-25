@@ -23,7 +23,7 @@
 │   ├── cs_crew/
 │   ├── cs_adk/
 │   ├── cs_claude-code/
-│   └── cs-langraph/
+│   └── cs-langgraph/
 │
 └── 07_note.md 
 ```
