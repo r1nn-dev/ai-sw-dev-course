@@ -1,4 +1,4 @@
-# AI IDE
+# 3. AI IDE
 
 ---
 ## 폴더 구조
@@ -6,7 +6,10 @@
 03_ai-ide/
 ├── 03-1_ai-ide-asgn/          
 │   ├── prd-todo-web/
-│   └── todo-web/               
+│   └── todo-web/       
+│       ├── index.html
+│       ├── style.css 
+│       └── README.md 
 ├── 03-2_PRD/            
 │   └── prd-docs.md
 │
