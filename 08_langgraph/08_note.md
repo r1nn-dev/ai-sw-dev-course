@@ -1,4 +1,4 @@
-# LangGraph 에이전트 패턴 
+# 8. LangGraph 에이전트 패턴 
 
 LangGraph와 Ollama를 활용한 에이전트 패턴 실습 프로젝트.
 
@@ -6,11 +6,11 @@ LangGraph와 Ollama를 활용한 에이전트 패턴 실습 프로젝트.
 
 | 파일 | 설명 |
 |------|------|
-| `03_langgraph_components.ipynb` | ReAct 패턴 구현 (단일 턴 + 자동 루프) |
-| `04_agentic_search.ipynb` | Tavily를 이용한 에이전틱 검색 |
-| `05_persistence_and_streaming.ipynb` | 메모리 지속성 및 스트리밍 |
-| `06_human_in_the_loop.ipynb` | 인터럽트 기반 Human-in-the-Loop, 상태 수정, 시간 여행 |
-| `07_essay_agent.ipynb` | 계획 → 조사 → 작성 → 반성 → 수정 흐름의 에세이 작성 에이전트 |
+| `08-1_langgraph_components.ipynb` | ReAct 패턴 구현 (단일 턴 + 자동 루프) |
+| `08-2_agentic_search.ipynb` | Tavily를 이용한 에이전틱 검색 |
+| `08-3_persistence_and_streaming.ipynb` | 메모리 지속성 및 스트리밍 |
+| `08-4_human_in_the_loop.ipynb` | 인터럽트 기반 Human-in-the-Loop, 상태 수정, 시간 여행 |
+| `08-5_essay_agent.ipynb` | 계획 → 조사 → 작성 → 반성 → 수정 흐름의 에세이 작성 에이전트 |
 
 ## 사전 요구사항
 
@@ -35,14 +35,14 @@ ollama pull llama3.1:8b
 
 ### 3. 환경변수 설정
 
-`.env` 파일에 Tavily API 키를 설정합니다.
+`.env` 파일에 Tavily API 키를 설정한다.
 
 ```bash
 # .env
 TAVILY_API_KEY=your_tavily_api_key_here
 ```
 
-> Tavily API 키는 [https://tavily.com](https://tavily.com) 에서 무료로 발급받을 수 있습니다.
+> Tavily API 키는 [https://tavily.com](https://tavily.com) 에서 무료로 발급받을 수 있다.
 
 ## 실행 방법
 
