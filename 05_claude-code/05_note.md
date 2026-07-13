@@ -1,4 +1,4 @@
-# Claude Code 
+# 5. Claude Code 
 
 ---
 ## 폴더 구조
@@ -17,7 +17,7 @@
 │   ├── README.md
 │   ├── CLAUDE.md
 │   ├── .claude/
-│   └── summary_파이썬클래스.md
+│   └── summary_파이썬클래스.md     # ouput file
 │
 └── 05_note.md 
 ```
