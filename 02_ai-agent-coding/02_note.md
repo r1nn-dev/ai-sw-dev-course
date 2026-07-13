@@ -1,6 +1,6 @@
-# AI Agent Coding
+# 2. AI Agent Coding
 
-## 1. Agent
+## 2.1 Agent
 - Agent: LLM(Large Language Model, 대규모 언어 모델)이 단순히 텍스트를 생성하는 것에 그치지 않고, 실제 도구(Tool)를 호출하고 환경과 상호작용할 수 있도록 확장된 시스템
 
 **Agent의 동작 구조**
@@ -43,7 +43,7 @@
 	 파일 생성이 안되고 있는데 이유를 알 수 있도록 로그를 띄워줘.
 ```
 
-## 2. MCP (Model Context Protocol)
+## 2.2 MCP (Model Context Protocol)
 - MCP(Model Context Protocol, 모델 컨텍스트 프로토콜): 에이전트가 호출할 수 있는 정보(도구와 데이터)를 제공하는 표준 프로토콜
 
 ### Terminology
