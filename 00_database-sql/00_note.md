@@ -1,4 +1,4 @@
-# Database SQL
+# 0. Database SQL
 
 ## 파일 구조
 ```
